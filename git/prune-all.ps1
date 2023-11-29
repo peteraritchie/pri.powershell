@@ -51,6 +51,7 @@ function Build-Command {
     return $expression;
 }
 
+# `System.IO.Directory.GetDirectories(...[SearchOption]::AllDirectories)` is much faster in PowerShell than `Get-ChildItem -Directory -r`
 foreach($item in $([Directory]::GetDirectories($currentDir, '.git', [SearchOption]::AllDirectories);)) {
     $dir = get-item -Force $item;
     Push-Location $dir.Parent;

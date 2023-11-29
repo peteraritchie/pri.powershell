@@ -51,10 +51,11 @@ function Build-Command {
     if($WhatIf.IsPresent) {
         $expression += ' --dry-run';
     }
-    $expression += " origin --refmap='' +refs/heads/main:refs/remotes/origin/main +refs/heads/develop:refs/remotes/origin/develop";
+    $expression += " origin";
     return $expression;
 }
 
+# `System.IO.Directory.GetDirectories(...[SearchOption]::AllDirectories)` is much faster in PowerShell than `Get-ChildItem -Directory -r`
 foreach($item in $([Directory]::GetDirectories($currentDir, '.git', [SearchOption]::AllDirectories);)) {
     $dir = get-item -Force $item;
     Push-Location $dir.Parent;
